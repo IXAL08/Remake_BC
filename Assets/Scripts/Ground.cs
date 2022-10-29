@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     public float speed, start, end;
+    private bool acelerar = true;
     void Start()
     {
         
@@ -25,6 +27,24 @@ public class Ground : MonoBehaviour
                 transform.position = new Vector2(start, transform.position.y);
             }
             
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (acelerar && speed <= 40)
+        {
+            speed += 0.1f;
+        }
+        else
+        {
+            acelerar = false;
+            speed -= 0.01f;
+        }
+
+        if (speed <= -0.1)
+        {
+            speed = 0;
         }
     }
 }
